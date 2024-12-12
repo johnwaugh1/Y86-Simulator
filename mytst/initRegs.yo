@@ -1,0 +1,110 @@
+0x000:                      | 	.pos 0
+                            | 	# initialize registers
+0x000: 30f00100000000000000 | 	irmovq 1, %rax
+0x00a: 30f10000000000000000 | 	irmovq 0, %rcx
+0x014: 30f20000000000000000 | 	irmovq 0, %rdx
+0x01e: 30f30000000000000000 | 	irmovq 0, %rbx
+0x028: 30f40000000000000000 | 	irmovq 0, %rsp
+0x032: 30f50000000000000000 | 	irmovq 0, %rbp
+0x03c: 30f60000000000000000 | 	irmovq 0, %rsi
+0x046: 30f70000000000000000 | 	irmovq 0, %rdi
+0x050: 30f80000000000000000 | 	irmovq 0, %r8
+0x05a: 30f90000000000000000 | 	irmovq 0, %r9
+0x064: 30fa0000000000000000 | 	irmovq 0, %r10
+0x06e: 30fb0000000000000000 | 	irmovq 0, %r11
+0x078: 30fc0000000000000000 | 	irmovq 0, %r12
+0x082: 30fd0000000000000000 | 	irmovq 0, %r13
+0x08c: 30fe0000000000000000 | 	irmovq 0, %r14
+                            | 	
+                            | 	#initialize registers (starting with %rbx) to the values 2 through 15
+                            | 	#do not use irmovq instructions
+                            | 
+0x096: 6010                 | 	addq %rcx, %rax
+0x098: 6011                 | 	addq %rcx, %rcx	
+                            | 
+0x09a: 6020                 | 	addq %rdx, %rax
+0x09c: 6021                 | 	addq %rdx, %rcx
+                            | 
+0x09e: 6031                 | 	addq %rbx, %rcx
+0x0a0: 6032                 | 	addq %rbx, %rdx
+                            | 	
+0x0a2: 6041                 | 	addq %rsp, %rcx
+0x0a4: 6043                 | 	addq %rsp, %rbx
+                            | 
+0x0a6: 6051                 | 	addq %rbp, %rcx
+0x0a8: 6054                 | 	addq %rbp, %rsp
+                            | 
+0x0aa: 6061                 | 	addq %rsi, %rcx
+0x0ac: 6065                 | 	addq %rsi, %rbp
+                            | 
+0x0ae: 6071                 | 	addq %rdi, %rcx
+0x0b0: 6076                 | 	addq %rdi, %rsi
+                            | 
+0x0b2: 6081                 | 	addq %r8, %rcx
+0x0b4: 6087                 | 	addq %r8, %rdi
+                            | 	
+0x0b6: 6091                 | 	addq %r9, %rcx
+0x0b8: 6098                 | 	addq %r9, %r8
+                            | 	
+0x0ba: 60a1                 | 	addq %r10, %rcx
+0x0bc: 60a9                 | 	addq %r10, %r9
+                            | 	
+0x0be: 60b1                 | 	addq %r11, %rcx
+0x0c0: 60ba                 | 	addq %r11, %r10
+                            | 	
+0x0c2: 60c1                 | 	addq %r12, %rcx
+0x0c4: 60cb                 | 	addq %r12, %r11
+                            | 	
+0x0c6: 60d1                 | 	addq %r13, %rcx
+0x0c8: 60dc                 | 	addq %r13, %r12
+                            | 	
+0x0ca: 60e1                 | 	addq %r14, %rcx
+0x0cc: 60ed                 | 	addq %r14, %r13
+                            | 
+                            | 	#now, reverse the values in the registers
+                            | 	#do not use irmovq instructions
+                            | 
+0x0ce: 6100                 | 	subq %rax, %rax
+0x0d0: 600e                 | 	addq %rax, %r14	
+                            | 
+0x0d2: 6111                 | 	subq %rcx, %rcx
+0x0d4: 601d                 | 	addq %rcx, %r13
+                            | 
+0x0d6: 6122                 | 	subq %rdx, %rdx
+0x0d8: 602c                 | 	addq %rdx, %r12
+                            | 
+0x0da: 6133                 | 	subq %rbx, %rbx
+0x0dc: 603b                 | 	addq %rbx, %r11
+                            | 
+0x0de: 6144                 | 	subq %rsp, %rsp
+0x0e0: 604a                 | 	addq %rsp, %r10
+                            | 
+0x0e2: 6155                 | 	subq %rbp, %rbp
+0x0e4: 6059                 | 	addq %rbp, %r9
+                            | 
+0x0e6: 6166                 | 	subq %rsi, %rsi
+0x0e8: 6068                 | 	addq %rsi, %r8
+                            | 
+0x0ea: 6188                 | 	subq %r8, %r8
+0x0ec: 6086                 | 	addq %r8, %rsi
+                            | 
+0x0ee: 6199                 | 	subq %r9, %r9
+0x0f0: 6095                 | 	addq %r9, %rbp
+                            | 
+0x0f2: 61aa                 | 	subq %r10, %r10
+0x0f4: 60a4                 | 	addq %r10, %rsp
+                            | 	
+0x0f6: 61bb                 | 	subq %r11, %r11
+0x0f8: 60b3                 | 	addq %r11, %rbx
+                            | 
+0x0fa: 61cc                 | 	subq %r12, %r12
+0x0fc: 60c2                 | 	addq %r12, %rdx
+                            | 
+0x0fe: 61dd                 | 	subq %r13, %r13
+0x100: 60d1                 | 	addq %r13, %rcx
+                            | 
+0x102: 61ee                 | 	subq %r14, %r14
+0x104: 60e0                 | 	addq %r14, %rax
+                            | 
+0x106: 00                   | 	halt
+                            | 

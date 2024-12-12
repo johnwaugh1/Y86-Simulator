@@ -1,0 +1,59 @@
+0x000:                      | 	.pos 0
+                            |         #TODO:
+                            |         # Initialize %rsp to stack (an address).
+                            |         # By convention, the first two parameters are passed
+                            |         # in %rdi and %rsi.
+                            |         # Initialize %rdi to list.
+                            |         # Initialize %rsi to mem[count].
+                            |         # By convention, a function result is returned in register %rax.
+                            |         # Initialize %rax to 0
+                            |         #
+                            |         # Call your function and halt after returning from function 
+                            |         # In final dump,  %rax should be 0x4d (77)
+                            | 	
+0x000: 30f40003000000000000 | 	irmovq stack, %rsp
+0x00a: 30f70802000000000000 | 	irmovq list, %rdi
+0x014: 506f0002000000000000 | 	mrmovq count, %rsi
+                            | 
+0x01e: 30f00000000000000000 | 	irmovq $0, %rax
+                            | 
+0x028: 30f80800000000000000 | 	irmovq $8, %r8
+0x032: 30f90100000000000000 | 	irmovq $1, %r9
+0x03c: 804600000000000000   | 	call addpos
+0x045: 00                   | 	halt
+                            | 	
+0x046:                      | addpos: #addpos(list, count)
+                            |         # set %rax to the sum of the positive numbers in the list
+                            |         # %rdi is list: the address of the first element in the list
+                            |         # %rsi is count: the number of elements in the list
+                            |         # %rax return value: set to the sum of the positive numbers
+                            |         #TODO:
+                            |         # You will need a loop.
+                            | 	# Read number from list. Add it to %rax if it is positive.
+                            | 	# Return when the end of list is reached.
+0x046:                      | loop: 	
+0x046: 50170000000000000000 | 	mrmovq (%rdi), %rcx
+0x050: 6087                 | 	addq %r8, %rdi
+0x052: 6211                 | 	andq %rcx, %rcx
+0x054: 715f00000000000000   | 	jle neg 
+0x05d: 6010                 | 	addq %rcx, %rax 
+0x05f: 6196                 | neg:	subq %r9, %rsi
+0x061: 6266                 | 	andq %rsi, %rsi
+0x063: 754600000000000000   | 	jge loop	
+0x06c: 90                   | 	ret
+                            | 
+                            | 	# The data
+0x200:                      | 	.pos 0x200
+0x200: 0a00000000000000     | count:  .quad 0xa
+0x208: feffffffffffffff     | list:	.quad -2
+0x210: 0400000000000000     | 	.quad 4
+0x218: 0500000000000000     | 	.quad 5
+0x220: e9ffffffffffffff     | 	.quad -23
+0x228: 1100000000000000     | 	.quad 17
+0x230: 1600000000000000     | 	.quad 22
+0x238: f5ffffffffffffff     | 	.quad -11
+0x240: 0800000000000000     | 	.quad 8
+0x248: 0900000000000000     | 	.quad 9
+0x250: 0c00000000000000     | 	.quad 12
+0x300:                      | 	.pos 0x300
+0x300: 0000000000000000     | stack:  .quad 0

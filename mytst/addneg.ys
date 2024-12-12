@@ -1,0 +1,121 @@
+        .pos 0
+#initialize %rax to 0
+#initialize another register to the address of the first number
+	irmovq $0, %rax 
+	mrmovq nums, %rbx
+	nop
+	nop
+	nop
+
+#For each number:  
+#Get the number out of memory.
+#Cause the condition codes to be modified based upon value of the number.
+#Add the number to %rax if it is negative.
+#
+#You'll have the same basic code for each of the six numbers since
+#we don't have any loops.
+
+	mrmovq (%rbx), %rcx
+	irmovq $0, %rdx
+	nop
+	nop
+	nop
+	subq %rdx, %rcx
+	irmovq $0, %rdi
+	nop
+	nop
+	nop
+	cmovl %rcx, %rdi
+	nop
+	nop
+	nop
+	addq %rdi, %rax
+
+	mrmovq 8(%rbx), %rcx
+	nop
+	nop
+	nop
+	subq %rdx, %rcx
+	irmovq $0, %rdi
+	nop
+	nop
+	nop
+	cmovl %rcx, %rdi
+	nop
+	nop
+	nop
+	addq %rdi, %rax
+
+	mrmovq 16(%rbx), %rcx
+	nop
+	nop
+	nop
+	subq %rdx, %rcx
+	irmovq $0, %rdi
+	nop
+	nop
+	nop
+	cmovl %rcx, %rdi
+	nop
+	nop
+	nop
+	addq %rdi, %rax
+
+	mrmovq 24(%rbx), %rcx
+	nop
+	nop
+	nop
+	subq %rdx, %rcx
+	irmovq $0, %rdi
+	nop
+	nop
+	nop
+	cmovl %rcx, %rdi
+	nop
+	nop
+	nop
+	addq %rdi, %rax
+
+	mrmovq 32(%rbx), %rcx
+	nop
+	nop
+	nop
+	subq %rdx, %rcx
+	irmovq $0, %rdi
+	nop
+	nop
+	nop
+	cmovl %rcx, %rdi
+	nop
+	nop
+	nop
+	addq %rdi, %rax
+
+	mrmovq 40(%rbx), %rcx
+	nop
+	nop
+	nop
+	subq %rdx, %rcx
+	irmovq $0, %rdi
+	nop
+	nop
+	nop
+	cmovl %rcx, %rdi
+	nop
+	nop	
+	nop
+	addq %rdi, %rax
+#finally store %rax in memory location result
+       irmovq result, %rsi 
+       rmmovq %rax, (%rsi)
+#
+        halt
+        .align 8
+result: .quad 0     #should be -30 = 0xffffffffffffffe2 at end
+nums:   .quad 11
+        .quad -23
+        .quad 0
+        .quad 15
+        .quad -3
+        .quad -4
+
